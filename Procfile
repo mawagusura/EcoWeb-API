@@ -1,1 +1,1 @@
-web: yarn build
+web: npm install --global yarn && yarn install && yarn build
