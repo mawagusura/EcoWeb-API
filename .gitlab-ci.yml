@@ -5,14 +5,13 @@ before_script:
     - apt-get install -y ruby-dev
     - gem install dpl
 stages:
-    - pages
+    - production
 
-staging:
+production:
     type: deploy
-    stage: staging
+    stage: production
     image: ruby:latest
     script:
-        - cd dist
         - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY
     only:
         - master
