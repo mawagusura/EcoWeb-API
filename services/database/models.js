@@ -2,14 +2,14 @@ var sequelize = require('./connection.js').sequelize
 var DataTypes = require('sequelize').DataTypes
 var exports = module.exports = {}
 
-exports.Payer = sequelize.define('payer', {
-    idpartenaire: {
+exports.Pay = sequelize.define('pay', {
+    idpartner: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         references: {
-            model: 'partenaires',
-            key: 'idpartenaire'
+            model: 'partner',
+            key: 'idpartner'
         }
     },
     iduser: {
@@ -20,31 +20,31 @@ exports.Payer = sequelize.define('payer', {
             key: 'iduser'
         }
     },
-    montant: {
+    amount: {
         type: DataTypes.DOUBLE,
         allowNull: false
     },
-    datepaiement: {
+    payementdate: {
         type: DataTypes.DATEONLY,
         allowNull: false
     }
 }, {
-    tableName: 'payer',
+    tableName: 'pay',
     timestamps: false
 });
 
-exports.Consommation = sequelize.define('consommation', {
-    idconsommation: {
+exports.Consumption = sequelize.define('consumption', {
+    idconsumption: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true
     },
-    consommationmoment: {
+    consumptionmoment: {
         type: DataTypes.DATE,
         allowNull: false
     },
-    consommation: {
+    consumption: {
         type: DataTypes.DOUBLE,
         allowNull: false
     },
@@ -57,27 +57,27 @@ exports.Consommation = sequelize.define('consommation', {
         }
     }
 }, {
-    tableName: 'consommation',
+    tableName: 'consumption',
     timestamps: false
 });
 
-exports.Partenaire = sequelize.define('partenaires', {
-    idpartenaire: {
+exports.Partner = sequelize.define('partner', {
+    idpartner: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true
     },
-    nompartenaire: {
+    partnername: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    description: {
+    details: {
         type: DataTypes.STRING,
         allowNull: true
     }
 }, {
-    tableName: 'partenaires',
+    tableName: 'partner',
     timestamps: false
 });
 
@@ -92,11 +92,11 @@ exports.User = sequelize.define('user', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    nom: {
+    name: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    prenom: {
+    surname: {
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -109,3 +109,65 @@ exports.User = sequelize.define('user', {
     tableName: 'user',
     timestamps: false
 });
+
+exports.Theme = sequelize.define('theme', {
+    idtheme: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    themecolor: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    themename: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+    }
+}, {
+    tableName: 'theme',
+    timestamps: false
+});
+
+exports.GoodPratice = sequelize.define('goodpratice', {
+    idpractice: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    content: {
+        type: DataTypes.STRING,
+        allowNull: false
+    }
+}, {
+    tableName: 'goodpratice'
+});
+
+exports.Have = sequelize.define('have', {
+    idtheme: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        references: {
+            model: 'theme',
+            key: 'idtheme'
+        }
+    },
+    idpractice: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'goodpratice',
+            key: 'idpractice'
+        }
+    }
+}, {
+    tableName: 'have',
+    timestamps: false
+});
+
+
+
