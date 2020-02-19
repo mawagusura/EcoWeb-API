@@ -11,3 +11,20 @@ exports.findByMailAndPassword = async function (mail, password) {
         }
     })
 }
+
+exports.findByMail = async function (mail) {
+    return User.findAll({
+        where: {
+            mail: mail
+        }
+    })
+}
+
+exports.addUser = async function (mail,password,name,surname) {
+    return User.create({
+        mail: mail,
+        password: password,
+        name: name,
+        surname : surname
+    });
+}
