@@ -22,4 +22,29 @@ router.post('/login', async function (req, res) {
     }
 })
 
+
+router.post('/signIn', async function (req, res) {
+    const mail = req.body.mail
+    const password = req.body.password
+    const name = req.body.name
+    const surname = req.body.surname
+
+    if (typeof mail === 'undefined' || typeof password === 'undefined' || typeof name === 'undefined' || typeof surname === 'undefined') {
+        res.status(400).json({errorMessage: 'Mail, password, name or surname not found in request.'})
+    } else {
+        try {
+            let idUser
+            if ((idUser = await userService.register(mail, password, name, surname))) {
+                req.session.mail = mail // Initialising user session
+                res.status(201).json({idUser: idUser})
+            } else {
+                res.status(409).json({errorMessage: 'Mail already exists'})
+            }
+        } catch (e) {
+            res.status(500).json({errorMessage: 'Database error'})
+        }
+    }
+})
+
+
 module.exports = router
