@@ -23,7 +23,7 @@ router.post('/login', async function (req, res) {
 })
 
 
-router.post('/signIn', async function (req, res) {
+router.post('/register', async function (req, res) {
     const mail = req.body.mail
     const password = req.body.password
     const name = req.body.name
@@ -34,7 +34,7 @@ router.post('/signIn', async function (req, res) {
     } else {
         try {
             let idUser
-            if ((idUser = await userService.register(mail, password, name, surname))) {
+            if ((idUser = await userService.register(mail, password, name, surname)) !== undefined) {
                 req.session.mail = mail // Initialising user session
                 res.status(201).json({idUser: idUser})
             } else {
