@@ -14,5 +14,4 @@ exports.checkPwd = function(pwd, hash2){
     return bcrypt.compareSync(pwd, hash2);
 }
 
-//console.log(exports.hashPwd("test"))
-console.log(exports.checkPwd("test", exports.hashPwd("test")))
+// console.log(exports.checkPwd("test", exports.hashPwd("test")))

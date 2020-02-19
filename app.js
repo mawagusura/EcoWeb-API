@@ -1,28 +1,18 @@
 var createError = require('http-errors')
 var express = require('express')
-const session = require('express-session')
 var path = require('path')
 var cookieParser = require('cookie-parser')
 var logger = require('morgan')
-
 var indexRouter = require('./routes/index')
 var usersRouter = require('./routes/users')
-
 var app = express()
 
+require('./passport.js')
 // view engine setup
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 app.use(cookieParser())
-
-//Setting user session
-app.use(session({
-    secret: process.env.SESSION_SECRET || 'AD3FoLtP4Szw0rD',
-    resave: false,
-    saveUninitialized: false,
-    cookie: {maxAge: 60000}
-}))
 
 app.use('/api', indexRouter)
 app.use('/api/users', usersRouter)
