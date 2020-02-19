@@ -23,7 +23,7 @@ exports.authenticate = async function (mail, password) {
 exports.register = async function (mail, password, name, surname) {
     console.log("New user '" + mail + "' is trying to register.")
     try {
-        if ((await userDB.findByMail(mail)) > 0) {
+        if ((await userDB.findByMail(mail)).length > 0) {
             console.log('Mail is already used')
             return undefined
         }
