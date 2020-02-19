@@ -3,15 +3,6 @@ const Op = require('sequelize').Op;
 
 var exports = module.exports = {}
 
-exports.findByMailAndPassword = async function (mail, password) {
-    return User.findAll({
-        where: {
-            mail: mail,
-            password: password
-        }
-    })
-}
-
 exports.findByMail = async function (mail) {
     return User.findAll({
         where: {
