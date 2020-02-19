@@ -1,4 +1,4 @@
-const {Consommation, Partenaire, Payer, User} = require('./models.js')
+const {User} = require('./models.js')
 const Op = require('sequelize').Op;
 
 var exports = module.exports = {}
