@@ -20,5 +20,8 @@
     "pg-hstore": "^2.3.3",
     "sequelize": "^5.21.4",
     "jsonwebtoken": "latest"
+  },
+  "engine":{
+	"yarn": "1.22.0"
   }
 }
