@@ -1,4 +1,4 @@
-var userDB = require('./database/usersDB.js')
+var userRepository = require('./database/repositories/userRepository')
 var cryptoUtils = require('../utils/cryptoUtils.js')
 var exports = module.exports = {}
 
@@ -6,7 +6,7 @@ var exports = module.exports = {}
 exports.authenticate = async function (mail, password) {
     try {
         console.log("'" + mail + "' is trying to connect.")
-        const user = await userDB.findByMail(mail)
+        const user = await userRepository.findByMail(mail)
         if (user && user.length === 1 && cryptoUtils.checkPwd(password,user[0].password)) {
             console.log("Credentials of '" + mail + "' are corrects.")
             return user[0]
@@ -23,7 +23,7 @@ exports.authenticate = async function (mail, password) {
 exports.register = async function (mail, password, name, surname) {
     console.log("New user '" + mail + "' is trying to register.")
     try {
-        if ((await userDB.findByMail(mail)).length > 0) {
+        if ((await userRepository.findByMail(mail)).length > 0) {
             console.log('Mail is already used')
             return undefined
         }
@@ -32,7 +32,7 @@ exports.register = async function (mail, password, name, surname) {
         throw e
     }
     try {
-        const res = await userDB.addUser(mail, cryptoUtils.hashPwd(password), name, surname)
+        const res = await userRepository.addUser(mail, cryptoUtils.hashPwd(password), name, surname)
         if (res) {
             console.log("User '" + mail + "' has been added successfully.")
             return res.iduser
