@@ -29,11 +29,14 @@ router.post('/login', async function (req, res) {
                     }
 
                     /** generate a signed json web token and return it in the response */
-                    const token = jwt.sign(JSON.stringify(payload), jwtSecret)
+                    const token = jwt.sign(payload, jwtSecret)
 
                     /** assign our jwt to the authorization header */
-                    res.set('Authorization', 'Bearer ' + token)
-                    res.status(200).json(user.idUser)
+                    //res.set('Authorization', 'Bearer ' + token)
+                    res.status(200).json({
+                        userId : user.userId,
+                        token : token
+                    })
                 })
             }
         })(req, res)
@@ -50,9 +53,10 @@ router.post('/register', async function (req, res) {
         res.status(400).json({errorMessage: 'Mail, password, name or surname not found in request.'})
     } else {
         try {
-            let idUser
-            if ((idUser = await userService.register(mail, password, name, surname)) !== undefined) {
-                res.status(201).json({idUser: idUser})
+            let user = await userService.register(mail, password, name, surname)
+            console.log(user.userId)
+            if (user !== undefined) {
+                res.status(201).json({idUser: user.userId})
             } else {
                 res.status(409).json({errorMessage: 'Mail already exists'})
             }

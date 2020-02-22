@@ -20,6 +20,10 @@ exports.authenticate = async function (mail, password) {
 
 }
 
+/**
+ * Register a new user and save it in the databse
+ * @returns an instance of class User defined in userModel.js
+ */
 exports.register = async function (mail, password, name, surname) {
     console.log("New user '" + mail + "' is trying to register.")
     try {
@@ -28,14 +32,14 @@ exports.register = async function (mail, password, name, surname) {
             return undefined
         }
     } catch (e) {
-        console.log('Error during verification of doubloons : ' + e)
+        console.log('Error during verification of doublons : ' + e)
         throw e
     }
     try {
         const res = await userRepository.addUser(mail, cryptoUtils.hashPwd(password), name, surname)
         if (res) {
             console.log("User '" + mail + "' has been added successfully.")
-            return res.iduser
+            return res
         } else {
             throw new Error("An error has occurred on the result of the database")
         }

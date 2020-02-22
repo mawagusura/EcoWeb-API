@@ -1,9 +1,9 @@
-const {User} = require('../models/userModel')
+const db = require('../connection')
 
 var exports = module.exports = {}
 
 exports.findByMail = async function (mail) {
-    return User.findAll({
+    return db.User.findAll({
         where: {
             mail: mail
         }
@@ -11,7 +11,7 @@ exports.findByMail = async function (mail) {
 }
 
 exports.addUser = async function (mail,password,name,surname) {
-    return User.create({
+    return db.User.create({
         mail: mail,
         password: password,
         name: name,

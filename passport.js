@@ -25,10 +25,11 @@ passport.use(new LocalStrategy({
 }));
 
 passport.use(new JWTStrategy({
-        jwtFromRequest: req => req.cookies.jwt,
+        jwtFromRequest: passportJWT.ExtractJwt.fromAuthHeaderAsBearerToken,
         secretOrKey: jwtSecret,
     },
     (jwtPayload, done) => {
+        console.log(jwtPayload)
         if (Date.now() > jwtPayload.expires) {
             return done('jwt expired');
         }
