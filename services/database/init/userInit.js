@@ -17,7 +17,7 @@ db.User.create({
     mail: 'amaury.lucas@gmail.com',
     password: cryptoUtils.hashPwd('test'),
     name: 'Lucas',
-    surname : 'Quontin'
+    surname : 'Amaury'
 });
 db.User.create({
     mail: 'benjamin.trotin@gmail.com',
