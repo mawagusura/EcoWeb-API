@@ -1,4 +1,4 @@
-const db = require('../connection')
+const db = require('../connexion')
 var cryptoUtils = require('../../../utils/cryptoUtils.js')
 
 db.User.create({
