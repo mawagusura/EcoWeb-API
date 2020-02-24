@@ -15,3 +15,5 @@ console.log(new Date(coucou1))
 console.log(new Date(coucou2))
 
 const db = require('../services/database/connexion')
+
+db.Advice

@@ -18,7 +18,7 @@ const models = {
     Consumption: ConsumptionModel.init(sequelize, Sequelize),
     Partner: PartnerModel.init(sequelize, Sequelize),
     Payment: PaymentModel.init(sequelize, Sequelize),
-    User: UserModel.init(sequelize, Sequelize)
+    User: UserModel.init(sequelize, Sequelize),
 }
 
 // Run `.associate` if it exists,
@@ -27,16 +27,10 @@ Object.values(models)
   .filter(model => typeof model.associate === "function")
   .forEach(model => model.associate(models));
 
-
-
-
-
 const db = {
   ...models,
   sequelize
 };
-
-
 
 module.exports = db
 

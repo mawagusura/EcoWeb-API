@@ -7,6 +7,7 @@ var logger = require('morgan')
 var indexRouter = require('./routes/index')
 var usersRouter = require('./routes/users')
 var consoRouter = require('./routes/consumption')
+var adviceRouter = require('./routes/advices')
 var app = express()
 
 //load middleware for authentication
@@ -23,6 +24,7 @@ app.use(cors())
 app.use('/api', indexRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/conso', consoRouter)
+app.use('/api/advice', adviceRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

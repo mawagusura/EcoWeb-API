@@ -1,7 +1,14 @@
-const {Advice} = require('../models/adviceModel')
-
 var exports = module.exports = {}
+const db = require('../connexion')
 
 exports.findAll = async function(){
-    return GoodPratice.findAll()
+    return db.Advice.findAll({
+        attributes: ['title', 'content'],
+        include: {
+            model: db.Theme,
+            attributes: ['themeColor','themeName'],
+            through: {attributes: []}
+        }
+
+    })
 }

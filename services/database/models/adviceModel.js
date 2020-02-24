@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize') 
+const Sequelize = require('sequelize')
 
 class Advice extends Sequelize.Model {
     static init(sequelize, DataTypes){
@@ -9,6 +9,11 @@ class Advice extends Sequelize.Model {
                     allowNull: false,
                     primaryKey: true,
                     autoIncrement: true
+                },
+                title: {
+                    type: DataTypes.TEXT,
+                    allowNull: false,
+                    unique: true
                 },
                 content: {
                     type: DataTypes.TEXT,
