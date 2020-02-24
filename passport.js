@@ -17,7 +17,7 @@ passport.use(new LocalStrategy({
         if (user) {
             return done(null, user);
         } else {
-            return done('Incorrect Mail / Password');
+            return done("{\"errorMessage\": \"Incorrect Mail / Password\"}");
         }
     } catch (error) {
         done(error);
