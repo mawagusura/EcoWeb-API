@@ -34,6 +34,10 @@ class User extends Sequelize.Model {
         }
         )
     }
+
+    static associate(models){
+        return models.User.hasMany(models.Consumption)
+    }
 }
 
 module.exports = User
