@@ -25,7 +25,7 @@ passport.use(new LocalStrategy({
 }));
 
 passport.use(new JWTStrategy({
-        jwtFromRequest: passportJWT.ExtractJwt.fromAuthHeaderAsBearerToken(),
+        jwtFromRequest: passportJWT.ExtractJwt.fromAuthHeaderAsBearerToken,
         secretOrKey: jwtSecret,
     },
     (jwtPayload, done) => {
