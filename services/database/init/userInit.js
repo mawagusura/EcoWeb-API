@@ -31,3 +31,9 @@ db.User.create({
     name: 'Fouillard',
     surname : 'Arnaud'
 });
+db.User.create({
+    mail: 'clement.blaise@gmail.com',
+    password: cryptoUtils.hashPwd('test'),
+    name: 'Blaise',
+    surname : 'Clément'
+});
