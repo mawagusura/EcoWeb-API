@@ -49,3 +49,26 @@ exports.register = async function (mail, password, name, surname) {
     }
 }
 
+/**
+ * Update the password of an existing user and verifies
+ * that the old password corresponds
+ * @param mail
+ * @param oldPassword
+ * @param newPassword
+ * @returns {Promise<boolean>}
+ */
+exports.updatePassword = async function (mail, oldPassword, newPassword) {
+    console.log("Updating password of '" + mail + "'")
+    try {
+        const user = await userRepository.findByMail(mail)
+        if (user && user.length === 1 && cryptoUtils.checkPwd(oldPassword,user[0].password)) {
+            await userRepository.updatePassword(mail, cryptoUtils.hashPwd(newPassword))
+            return true
+        }
+        return false
+    } catch (e) {
+        console.log('Error during update of user : ' + e)
+        throw e
+    }
+}
+
