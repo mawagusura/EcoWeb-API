@@ -18,3 +18,9 @@ exports.addUser = async function (mail,password,name,surname) {
         surname : surname
     });
 }
+
+exports.updatePassword = async function (mail, newPassword) {
+    return db.User.update(
+        { password: newPassword },
+        { where: { mail: mail } });
+}

@@ -34,8 +34,8 @@ router.post('/login', async function (req, res) {
                     /** assign our jwt to the authorization header */
                     //res.set('Authorization', 'Bearer ' + token)
                     res.status(200).json({
-                        userId : user.userId,
-                        token : token
+                        userId: user.userId,
+                        token: token
                     })
                 })
             }
@@ -62,6 +62,32 @@ router.post('/register', async function (req, res) {
             }
         } catch (e) {
             res.status(500).json({errorMessage: 'Database error'})
+        }
+    }
+})
+
+/**
+ * Change the password of the connected user with a new one
+ * @param mail         mailUtilisateur
+ * @param oldPassword  ancien mot de passe
+ * @param newPassword  nouveau mot de passe
+ */
+router.put('/changePassword', passport.authenticate('jwt', {session: false}), async function (req, res) {
+    const mail = req.body.mail
+    const oldPassword = req.body.oldPassword
+    const newPassword = req.body.newPassword
+
+    if (typeof oldPassword === 'undefined' || typeof newPassword === 'undefined' || typeof mail === 'undefined') {
+        res.status(400).json({errorMessage: 'OldPassword, newPassword or mail not found.'})
+    } else {
+        try {
+            if (await userService.updatePassword(mail, oldPassword, newPassword)) {
+                res.status(202).json({successMessage: 'Password has been changed !'})
+            } else {
+                res.status(409).json({errorMessage: 'Old password does not match'})
+            }
+        } catch (e) {
+            res.status(500).json({errorMessage: 'Database error. The password has not been changed'})
         }
     }
 })
