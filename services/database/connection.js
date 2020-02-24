@@ -27,10 +27,12 @@ Object.values(models)
   .filter(model => typeof model.associate === "function")
   .forEach(model => model.associate(models));
 
+
+
 // Persiste les changements en base
 // A décommenter pour modifier le schéma de base de donnée
-// ATTENTION : cela supprime les tables et donc les données 
-//sequelize.sync({force: true})
+// ATTENTION : cela supprime les tables et donc les données
+sequelize.sync({force: true}).then(() => require('init/userInit.js'))
 
 const db = {
   ...models,
