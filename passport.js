@@ -7,10 +7,9 @@ var userService = require('./services/userService.js')
 var jwtSecret = require('./utils/constUtils.js').jwtsecret
 
 passport.use(new BasicStrategy(
-    function(mail, password, done) {
+    async function(mail, password, done) {
         try {
-            const user = userService.authenticate(mail,password)
-    
+            const user = await userService.authenticate(mail,password)
             if (user) {
                 return done(null, user);
             } else {
@@ -27,7 +26,6 @@ passport.use(new JWTStrategy({
         secretOrKey: jwtSecret,
     },
     (jwtPayload, done) => {
-        console.log(jwtPayload)
         if (Date.now() > jwtPayload.expires) {
             return done('jwt expired');
         }
