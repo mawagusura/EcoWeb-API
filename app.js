@@ -12,7 +12,7 @@ var app = express()
 
 //load middleware for authentication
 require('./passport.js')
-require('./services/database/init/dbInit.js')
+//require('./services/database/init/dbInit.js')
 
 
 // view engine setup
