@@ -10,6 +10,8 @@ router.post('/add', passport.authenticate('jwt', { session: false}), async funct
         res.status(400).json({errorMessage: 'Mail or conso not found in request.'})
     } else if(isNaN(conso)){
         res.status(400).json({errorMessage: 'conso should be a Double'})
+    } else if (conso < 0){
+        res.status(400).json({errorMessage: 'conso should be positive'})
     } else {
         try {
             let consoObj = await consoService.addConsumption(mail, conso)
