@@ -1,6 +1,5 @@
 const db = require('../connexion')
 var cryptoUtils = require('../../../utils/cryptoUtils.js')
-
 db.User.create({
     mail: 'nicolas.bolo@gmail.com',
     password: cryptoUtils.hashPwd('test'),
