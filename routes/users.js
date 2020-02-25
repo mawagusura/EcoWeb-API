@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 var jwtSecret = require('../utils/constUtils.js').jwtsecret
 var router = express.Router()
 
-router.get('/login', async function (req, res) {
+router.post('/login', async function (req, res) {
     passport.authenticate(
         'basic',
         {session: false},

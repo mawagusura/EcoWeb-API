@@ -14,6 +14,7 @@ var app = express()
 require('./passport.js')
 require('./services/database/init/dbInit.js')
 
+
 // view engine setup
 app.use(logger('dev'))
 app.use(express.json())
@@ -24,7 +25,7 @@ app.use(cors())
 app.use('/api', indexRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/conso', consoRouter)
-app.use('/api/advice', adviceRouter)
+app.use('/api/advices', adviceRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
