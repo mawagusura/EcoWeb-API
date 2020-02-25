@@ -25,6 +25,10 @@ class Partner extends Sequelize.Model {
         }
         );
     }
+
+    static associate(models){
+        this.association = this.hasMany(models.Payment, {foreignKey: 'partnerId', sourceKey: 'partnerId'})
+    }
 }
 
 module.exports = Partner

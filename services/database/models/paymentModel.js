@@ -12,14 +12,6 @@ class Payment extends Sequelize.Model {
                     key: 'partnerId'
                 }
             },
-            userId: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    model: 'User',
-                    key: 'userId'
-                }
-            },
             amount: {
                 type: DataTypes.DOUBLE,
                 allowNull: false
@@ -38,7 +30,8 @@ class Payment extends Sequelize.Model {
     }
 
     static associate(models){
-        this.association = this.belongsTo(models.User)
+        this.UserAssociation = this.belongsTo(models.User, {foreignKey: 'userId', targetKey: 'userId'})
+        this.PartnerAssociation = this.belongsTo(models.Partner, {foreignKey: 'partnerId', targetKey: 'partnerId'})
     }
 }
 

@@ -16,14 +16,6 @@ class Consumption extends Sequelize.Model {
             consumptionAmount: {
                 type: DataTypes.DOUBLE,
                 allowNull: false
-            },
-            userId: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    model: 'User',
-                    key: 'userId'
-                }
             }
         },
         {
@@ -35,7 +27,7 @@ class Consumption extends Sequelize.Model {
     }
 
     static associate(models){
-        this.association = this.belongsTo(models.User) 
+        this.association = this.belongsTo(models.User, {foreignKey: 'userId', targetKey: 'userId'}) 
     }
 }
 
