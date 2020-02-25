@@ -36,7 +36,8 @@ class User extends Sequelize.Model {
     }
 
     static associate(models){
-        return models.User.hasMany(models.Consumption)
+        this.ConsumptionAssociation =  this.hasMany(models.Consumption)
+        this.PaymentAssociation =  this.hasMany(models.Payment)
     }
 }
 

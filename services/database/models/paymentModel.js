@@ -24,7 +24,7 @@ class Payment extends Sequelize.Model {
                 type: DataTypes.DOUBLE,
                 allowNull: false
             },
-            payementDate: {
+            paymentDate: {
                 type: DataTypes.DATEONLY,
                 allowNull: false
             }
@@ -35,6 +35,10 @@ class Payment extends Sequelize.Model {
             sequelize
         }
         )
+    }
+
+    static associate(models){
+        this.association = this.belongsTo(models.User)
     }
 }
 

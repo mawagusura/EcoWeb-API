@@ -33,6 +33,10 @@ class Consumption extends Sequelize.Model {
         }      
         );
     }
+
+    static associate(models){
+        this.association = this.belongsTo(models.User) 
+    }
 }
 
 module.exports = Consumption

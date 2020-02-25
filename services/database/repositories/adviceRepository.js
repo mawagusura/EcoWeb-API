@@ -3,7 +3,7 @@ const db = require('../connexion')
 
 exports.findAll = async function(){
     return db.Advice.findAll({
-        attributes: ['title', 'content'],
+        attributes: ['adviceId','title', 'content'],
         include: {
             model: db.Theme,
             attributes: ['themeColor','themeName'],
